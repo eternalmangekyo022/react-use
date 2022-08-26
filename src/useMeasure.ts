@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useCallback, useState } from 'react';
 import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect';
 import { isBrowser, noop } from './misc/util';
 
@@ -24,7 +24,7 @@ function useMeasure<E extends Element = Element>(): UseMeasureResult<E> {
   const [element, ref] = useState<E | null>(null);
   const [rect, setRect] = useState<UseMeasureRect>(defaultState);
 
-  const observer = useMemo(
+  const observer = useCallback(
     () =>
       new (window as any).ResizeObserver((entries) => {
         if (entries[0]) {
